@@ -1,0 +1,17 @@
+CREATE DATABASE IF NOT EXISTS idiomas CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE idiomas;
+
+CREATE TABLE IF NOT EXISTS secciones (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(150) NOT NULL,
+    descripcion TEXT,
+    creada_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS palabras (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    seccion_id INT NOT NULL,
+    palabra VARCHAR(255) NOT NULL,
+    traduccion VARCHAR(255) NOT NULL,
+    FOREIGN KEY (seccion_id) REFERENCES secciones(id) ON DELETE CASCADE
+);

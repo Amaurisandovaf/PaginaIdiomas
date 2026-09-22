@@ -1,0 +1,1 @@
+<?php require "config.php"; $id=(int)($_GET["id"]??0); if($id){$st=$pdo->prepare("DELETE FROM secciones WHERE id=?");$st->execute([$id]);} header("Location:index.php");exit;

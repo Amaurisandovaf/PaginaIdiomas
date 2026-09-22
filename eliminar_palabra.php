@@ -1,0 +1,1 @@
+<?php require "config.php"; $id=(int)($_GET["id"]??0);$sid=(int)($_GET["seccion_id"]??0);if($id){$st=$pdo->prepare("DELETE FROM palabras WHERE id=?");$st->execute([$id]);}header("Location:seccion.php?id=".$sid);exit;
