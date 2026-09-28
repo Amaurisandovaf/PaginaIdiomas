@@ -19,7 +19,6 @@ $secciones = $pdo->query("SELECT s.*, COUNT(p.id) AS total FROM secciones s LEFT
 <?php foreach ($secciones as $s): ?>
 <div class="card">
 <h3><?= htmlspecialchars($s["titulo"]) ?></h3>
-<p><?= nl2br(htmlspecialchars($s["descripcion"] ?? "")) ?></p>
 <div class="muted"><?= $s["total"] ?> palabra(s)</div>
 <div class="actions">
 <a class="btn" href="prueba.php?id=<?= $s["id"] ?>">Iniciar prueba</a>
