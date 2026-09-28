@@ -23,7 +23,18 @@ if (!$words) die("Esta sección no tiene palabras. <a href='seccion.php?id=$id'>
 <div class="container test">
   <a href="index.php">← Salir</a>
   <h1><?= htmlspecialchars($s["titulo"]) ?></h1>
-  <div class="description"><?= nl2br(htmlspecialchars($s["descripcion"] ?? "")) ?></div>
+  
+  <?php if (!empty($s['descripcion'])): ?>
+    <details style="margin: 15px 0; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 14px;">
+        <summary style="cursor: pointer; font-weight: bold; color: #2563eb; user-select: none;">
+            📖 Ver más / Explicación de la sección
+        </summary>
+        <div style="margin-top: 10px; line-height: 1.6; color: #334155;">
+            <?= nl2br(htmlspecialchars($s['descripcion'])) ?>
+        </div>
+    </details>
+  <?php endif; ?>
+
   <div id="app"></div>
 </div>
 
@@ -111,7 +122,6 @@ function check() {
     if (!difficultMode && errors[current.id] >= 3) {
       normal = normal.filter(x => x.id !== current.id);
       if (!difficult.some(x => x.id === current.id)) {
-        // Al enviar a la lista difícil también se coloca en una posición al azar
         const randPos = Math.floor(Math.random() * (difficult.length + 1));
         difficult.splice(randPos, 0, current);
       }
@@ -121,8 +131,6 @@ function check() {
       const idx = arr.findIndex(x => x.id === current.id);
       arr.splice(idx, 1);
       
-      // Reinserción aleatoria: si hay más de 1 pendiente, se coloca entre la posición 1 y el final
-      // para evitar que se repita de forma inmediata en el turno consecutivo.
       if (arr.length > 1) {
         const randPos = Math.floor(Math.random() * arr.length) + 1;
         arr.splice(randPos, 0, current);
